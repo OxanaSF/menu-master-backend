@@ -4,11 +4,8 @@ import com.menumaster.springbootlibrary.entites.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
-import java.util.List;
-import java.util.ArrayList;
+
 
 @Data
 @AllArgsConstructor
@@ -28,4 +25,6 @@ public class RecipeDto implements Serializable {
     public Recipe toDomain() {
         return Recipe.builder().recipe_id(id).name(name).imageUrl(imageUrl).instructions(instructions).servingSize(servingsSize).build();
     }
+
+
 }

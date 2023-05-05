@@ -1,5 +1,6 @@
 package com.menumaster.springbootlibrary.services;
 import com.menumaster.springbootlibrary.entites.Recipe;
+import com.menumaster.springbootlibrary.entites.User;
 import com.menumaster.springbootlibrary.repositories.RecipeRepository;
 import com.menumaster.springbootlibrary.services.RecipeService;
 import net.minidev.json.JSONArray;
@@ -11,7 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
+
+
+
+
+
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +88,29 @@ public class RecipeServiceImpl implements RecipeService {
         return matchingRecipes;
     }
 
+
+
+    @Override
+    public List<Recipe> getFavoriteRecipes() {
+//        // Get the current user (you will need to define a way to get the current user)
+//        User currentUser = getCurrentUser();
+//
+//        // Get all the favorite recipes for the current user
+//        List<FavoriteRecipe> favoriteRecipes = favoriteRecipeRepository.findByUser(currentUser);
+//
+//        // Convert the list of favorite recipes to a list of recipes
+//        List<Recipe> recipes = favoriteRecipes.stream()
+//                .map(FavoriteRecipe::getRecipe)
+//                .collect(Collectors.toList());
+//
+//        return recipes;
+        return null;
+    }
+
+    @Override
+    public Recipe getRecipeBySpoonacularId(int spoonacularId) {
+        return null;
+    }
 
 
 }
