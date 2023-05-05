@@ -3,7 +3,6 @@ package com.menumaster.springbootlibrary.entites;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,4 +65,24 @@ public class Recipe {
         return imageUrl;
     }
 
+    @Entity
+    @Table(name = "favorite_recipe")
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class FavoriteRecipe {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "favorite_recipe_id")
+        private Long favoriteRecipeId;
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "user_id")
+        private User user;
+
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "recipe_id")
+        private Recipe recipe;
+    }
 }

@@ -1,5 +1,6 @@
 package com.menumaster.springbootlibrary.services;
 
+import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.entites.Recipe;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +17,5 @@ public interface SpoonacularService {
      */
     List<Recipe> getSpoonacularRecipes(int limit);
 
+    RecipeDto getRecipeById(int spoonacularId);
 }

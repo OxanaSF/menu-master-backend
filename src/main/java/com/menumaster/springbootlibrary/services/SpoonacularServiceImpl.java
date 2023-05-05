@@ -1,6 +1,7 @@
 package com.menumaster.springbootlibrary.services;
 
 
+import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.entites.Recipe;
 import com.menumaster.springbootlibrary.spoonacular.SpoonacularRecipe;
 import com.menumaster.springbootlibrary.spoonacular.SpoonacularResponse;
@@ -36,5 +37,10 @@ public class SpoonacularServiceImpl implements SpoonacularService {
         }
         // Если ответ есть конвертируем его в наше представление и возвращаем
         return response.getResults().stream().map(SpoonacularRecipe::toDomain).toList();
+    }
+
+    @Override
+    public RecipeDto getRecipeById(int spoonacularId) {
+        return null;
     }
 }

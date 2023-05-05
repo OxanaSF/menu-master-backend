@@ -1,10 +1,21 @@
 package com.menumaster.springbootlibrary.services;
 
+import com.menumaster.springbootlibrary.dtos.UserDto;
 import com.menumaster.springbootlibrary.entites.User;
 
+import java.util.List;
+
 public interface UserService {
-    User createUser(User user);
-    User getUserById(Long id);
+    List<String> createUser(UserDto user);
+
+    List<String> logout();
+
+    User getUserById(long id);
+
+    User getUserByUsername(String username);
+
     User updateUser(User user);
-    void deleteUser(Long id);
+    void deleteUser(long id);
+
+    List<String> login(UserDto userLogin);
 }
