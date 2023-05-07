@@ -1,11 +1,13 @@
 package com.menumaster.springbootlibrary.dtos;
 
+import com.menumaster.springbootlibrary.entites.Recipe;
 import com.menumaster.springbootlibrary.entites.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,7 +23,7 @@ public class UserDto implements Serializable {
     private String preferredCuisineTypes;
     private String groceryList;
     private String individualMenu;
-    private List<RecipeDto> favoriteRecipes;
+    private List<Recipe> favoriteRecipes;
 
     public UserDto(User user) {
         this.userId = user.getUserId();
@@ -33,5 +35,7 @@ public class UserDto implements Serializable {
         this.preferredCuisineTypes = user.getPreferredCuisineTypes();
         this.groceryList = user.getGroceryList();
         this.individualMenu = user.getIndividualMenu();
+
+        this.favoriteRecipes = user.getFavoriteRecipes();
     }
 }
