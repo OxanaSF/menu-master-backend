@@ -21,6 +21,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
+    public User saveUser(User user) {
+        return userrepository.save(user);
+    }
+
 
     @Override
     @Transactional

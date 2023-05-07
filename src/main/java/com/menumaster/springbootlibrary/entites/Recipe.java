@@ -47,6 +47,7 @@ public class Recipe {
 
     @ManyToMany(mappedBy = "favoriteRecipes")
     private List<User> users = new ArrayList<>();
+    private Long userId;
 
 
     public void setDescription(String description) {
@@ -63,6 +64,10 @@ public class Recipe {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Entity

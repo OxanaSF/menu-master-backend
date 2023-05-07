@@ -1,5 +1,6 @@
 package com.menumaster.springbootlibrary.entites;
 
+import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.dtos.UserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -46,9 +47,11 @@ public class User {
     private String individualMenu = "";
 
     @ManyToMany
-    @JoinTable(name = "User_Favorite_Recipe",
+    @JoinTable(
+            name = "user_favorite_recipe",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_id"))
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
     private List<Recipe> favoriteRecipes = new ArrayList<>();
 
     public User(UserDto user) {

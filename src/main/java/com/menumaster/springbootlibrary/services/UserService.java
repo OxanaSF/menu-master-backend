@@ -18,4 +18,7 @@ public interface UserService {
     void deleteUser(long id);
 
     List<String> login(UserDto userLogin);
+
+    User saveUser(User user);
+
 }
