@@ -1,5 +1,6 @@
 package com.menumaster.springbootlibrary.entites;
 
+import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,24 +20,24 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recipe_id")
-    private Long recipe_id;
+    private Long recipeId;
 
     @Column(name = "name")
     private String name;
     @Column(name = "cuisine_type")
     private String cuisineType;
-    @Column(name = "instructions")
+    @Column(name = "instructions", columnDefinition = "json", length = 3000)
     private String instructions;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 2000)
     private String description;
 
     @Column(name = "serving_size")
-    private Integer servingSize;
+    private int servingSize;
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "nutritional_information", columnDefinition = "json")
+    @Column(name = "nutritional_information", columnDefinition = "json", length = 2000)
     private String nutritionalInformation;
 
     @Column(name = "spoonacular_id")
@@ -70,24 +71,32 @@ public class Recipe {
         this.userId = userId;
     }
 
-    @Entity
-    @Table(name = "favorite_recipe")
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class FavoriteRecipe {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "favorite_recipe_id")
-        private Long favoriteRecipeId;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "user_id")
-        private User user;
+    public  Recipe(RecipeDto recipe) {
+        this.recipeId = recipe.getRecipeId();
+        this.name = recipe.getName();
+        this.cuisineType = recipe.getCuisineType();
+        this.description = recipe.getDescription();
+        this.servingSize = recipe.getServingSize();
+        this.imageUrl = recipe.getImageUrl();
+        this.nutritionalInformation = recipe.getNutritionalInformation();
+        this.instructions = recipe.getInstructions();
+        this.spoonacularId = recipe.getSpoonacularId();
+    }
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "recipe_id")
-        private Recipe recipe;
+
+    public static Recipe fromDomain(RecipeDto recipeDto) {
+        return Recipe.builder()
+                .recipeId(recipeDto.getRecipeId())
+                .name(recipeDto.getName())
+                .cuisineType(recipeDto.getCuisineType())
+                .description(recipeDto.getDescription())
+                .servingSize(recipeDto.getServingSize())
+                .imageUrl(recipeDto.getImageUrl())
+                .nutritionalInformation(recipeDto.getNutritionalInformation())
+                .instructions(recipeDto.getInstructions())
+                .spoonacularId(recipeDto.getSpoonacularId())
+                .build();
     }
 }

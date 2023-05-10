@@ -16,6 +16,10 @@ public interface SpoonacularService {
      * @return list of resutls
      */
     List<Recipe> getSpoonacularRecipes(int limit);
+//    List<RecipeDto> getSpoonacularRecipesInSearchBar(String query, int limit, boolean instructionsRequired, boolean addRecipeInformation);
+String getSpoonacularRecipesInSearchBar(String query, int limit, boolean instructionsRequired, boolean addRecipeInformation);
 
+    List<RecipeDto> searchSpoonacularRecipes(String query, int limit);
     RecipeDto getRecipeById(int spoonacularId);
+
 }
