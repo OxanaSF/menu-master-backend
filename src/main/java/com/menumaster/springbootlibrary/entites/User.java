@@ -1,6 +1,5 @@
 package com.menumaster.springbootlibrary.entites;
 
-import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.dtos.UserDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

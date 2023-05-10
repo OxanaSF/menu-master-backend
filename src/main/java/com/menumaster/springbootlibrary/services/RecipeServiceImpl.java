@@ -1,10 +1,9 @@
 package com.menumaster.springbootlibrary.services;
+import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.entites.Recipe;
-import com.menumaster.springbootlibrary.entites.User;
 import com.menumaster.springbootlibrary.repositories.RecipeRepository;
-import com.menumaster.springbootlibrary.services.RecipeService;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
@@ -13,11 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
-
-
-
-
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +22,8 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Autowired
     private RecipeRepository recipeRepository;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -88,29 +86,45 @@ public class RecipeServiceImpl implements RecipeService {
         return matchingRecipes;
     }
 
-
-
-    @Override
-    public List<Recipe> getFavoriteRecipes() {
-//        // Get the current user (you will need to define a way to get the current user)
-//        User currentUser = getCurrentUser();
-//
-//        // Get all the favorite recipes for the current user
-//        List<FavoriteRecipe> favoriteRecipes = favoriteRecipeRepository.findByUser(currentUser);
-//
-//        // Convert the list of favorite recipes to a list of recipes
-//        List<Recipe> recipes = favoriteRecipes.stream()
-//                .map(FavoriteRecipe::getRecipe)
-//                .collect(Collectors.toList());
-//
-//        return recipes;
-        return null;
-    }
-
     @Override
     public Recipe getRecipeBySpoonacularId(int spoonacularId) {
         return null;
     }
+
+
+    @Override
+    @Transactional
+    public ResponseEntity<String> createRecipe(RecipeDto recipe, long userId) {
+        List<String> response = new ArrayList<>();
+
+        Recipe newRecipe = new Recipe(recipe);
+        newRecipe.setUserId(userId);
+
+        System.out.println("***************");
+        System.out.println("***************");
+        System.out.println("newRecipe.getServingSize() " + newRecipe.getServingSize());
+        System.out.println("***************");
+        System.out.println("***************");
+        recipeRepository.save(newRecipe);
+
+        return ResponseEntity.ok("Recipe created successfully");
+    }
+
+
+    @Override
+    public List<RecipeDto> getUserRecipes(String userId) {
+        List<Recipe> recipes = recipeRepository.findRecipesByUserId(userId);
+
+        List<RecipeDto> recipeDtos = recipes.stream()
+                .map(RecipeDto::fromDomain)
+                .collect(Collectors.toList());
+
+        return recipeDtos;
+
+
+    }
+
+
 
 
 }

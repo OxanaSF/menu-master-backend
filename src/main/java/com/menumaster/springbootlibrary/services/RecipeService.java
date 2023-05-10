@@ -1,6 +1,8 @@
 package com.menumaster.springbootlibrary.services;
 
+import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.entites.Recipe;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +15,10 @@ public interface RecipeService {
     void deleteRecipe(Long id);
     Recipe getRecipeFromSpoonacularApi(String recipeId);
     List<Recipe> searchRecipes(String query);
-    Collection<Recipe> getFavoriteRecipes();
-
     Recipe getRecipeBySpoonacularId(int spoonacularId);
+    public ResponseEntity<String> createRecipe(RecipeDto recipeDto, long userId);
+    List<RecipeDto> getUserRecipes(String userId);
+
+
+
 }
