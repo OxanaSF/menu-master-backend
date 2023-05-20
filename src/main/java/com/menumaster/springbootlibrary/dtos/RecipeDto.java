@@ -24,19 +24,6 @@ public class RecipeDto implements Serializable {
     private int spoonacularId;
 
 
-
-    public  RecipeDto(Recipe recipe) {
-        this.recipeId = recipe.getRecipeId();
-        this.name = recipe.getName();
-        this.cuisineType = recipe.getCuisineType();
-        this.instructions = recipe.getInstructions();
-        this.description = recipe.getDescription();
-        this.servingSize = recipe.getServingSize();
-        this.imageUrl = recipe.getImageUrl();
-        this.nutritionalInformation = recipe.getNutritionalInformation();
-        this.spoonacularId = recipe.getSpoonacularId();
-    }
-
     public static RecipeDto fromDomain(Recipe domain) {
         return RecipeDto.builder()
                 .recipeId(domain.getRecipeId())
@@ -50,22 +37,6 @@ public class RecipeDto implements Serializable {
                 .spoonacularId(domain.getSpoonacularId())
                 .build();
     }
-
-
-//    public RecipeDto (SpoonacularRecipe spoonacularRecipe) {
-//        return RecipeDto.builder()
-//        .recipeId()
-//                .name(spoonacularRecipe.getTitle())
-//                .cuisineType(spoonacularRecipe.)
-//                .description(spoonacularRecipe.)
-//                .servingSize(spoonacularRecipe.getServings())
-//                .imageUrl(spoonacularRecipe.getImage())
-//                .nutritionalInformation(spoonacularRecipe.)
-//                .instructions(spoonacularRecipe.)
-//                .spoonacularId(spoonacularRecipe.getId())
-//                .build();
-//    }
-//
 
 
 

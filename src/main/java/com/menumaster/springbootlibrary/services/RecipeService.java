@@ -4,7 +4,6 @@ import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.entites.Recipe;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface RecipeService {
@@ -12,12 +11,16 @@ public interface RecipeService {
     List<Recipe> getAllRecipes();
     List<Recipe> getAllRecipesLimited();
     Recipe saveRecipe(Recipe recipe);
-    void deleteRecipe(Long id);
+    void deleteRecipe(Long userId, int spoonacularId);
+
+
     Recipe getRecipeFromSpoonacularApi(String recipeId);
     List<Recipe> searchRecipes(String query);
     Recipe getRecipeBySpoonacularId(int spoonacularId);
     public ResponseEntity<String> createRecipe(RecipeDto recipeDto, long userId);
     List<RecipeDto> getUserRecipes(String userId);
+    public boolean recipeExists(RecipeDto recipe, long userId);
+    boolean recipeExistsByUserIdAndSpoonacularId(long userId, int spoonacularId);
 
 
 

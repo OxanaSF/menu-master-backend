@@ -9,7 +9,9 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "recipe")
+@Table(name = "recipe", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "spoonacular_id")
+})
 @Getter
 @Setter
 @Builder
@@ -37,7 +39,7 @@ public class Recipe {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "nutritional_information", columnDefinition = "json", length = 2000)
+    @Column(name = "nutritional_information", length = 2000)
     private String nutritionalInformation;
 
     @Column(name = "spoonacular_id")

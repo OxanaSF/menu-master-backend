@@ -1,17 +1,17 @@
 package com.menumaster.springbootlibrary.controllers;
 import com.menumaster.springbootlibrary.dtos.RecipeDto;
 import com.menumaster.springbootlibrary.entites.Recipe;
+import com.menumaster.springbootlibrary.services.RecipeService;
 import com.menumaster.springbootlibrary.services.SpoonacularService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
 public class SpoonacularController {
 
+    @Autowired
+    private RecipeService recipeService;
     private final SpoonacularService spoonacularService;
 
     @Autowired
@@ -23,38 +23,11 @@ public class SpoonacularController {
     @ResponseBody
     public List<RecipeDto> getSpoonacularRecipes(
             @RequestParam(name = "limit", defaultValue = "10") int limit) {
-        // конвертируем из доменного в транспортное представление и отправляем
         return spoonacularService.getSpoonacularRecipes(limit)
                 .stream()
                 .map(RecipeDto::fromDomain)
                 .toList();
     }
-
-//    @GetMapping("/recipes/complexSearch")
-//    @ResponseBody
-//    public List<RecipeDto> getSpoonacularRecipesInSearchBar(
-//            @RequestParam(name = "query") String query,
-//            @RequestParam(name = "limit", defaultValue = "10") int limit,
-//            @RequestParam(name = "instructionsRequired", defaultValue = "true") boolean instructionsRequired,
-//            @RequestParam(name = "addRecipeInformation", defaultValue = "true") boolean addRecipeInformation
-//    ) {
-//
-//        List<RecipeDto> res = spoonacularService.getSpoonacularRecipesInSearchBar(query, limit, instructionsRequired, addRecipeInformation);
-////        System.out.println("******************");
-////        System.out.println("******************");
-////        System.out.println("******************");
-////        System.out.println("******************");
-////        System.out.println("SPOONACULAR CONTROLLER.getUserRecipes(query, limit): " + res);
-////        System.out.println("******************");
-////        System.out.println("******************");
-////        System.out.println("******************");
-////        System.out.println("******************");
-//
-//        return res;
-//
-//
-//    }
-
 
 
     @GetMapping("/recipes/complexSearch")
@@ -67,18 +40,21 @@ public class SpoonacularController {
     ) {
 
         String res = spoonacularService.getSpoonacularRecipesInSearchBar(query, limit, instructionsRequired, addRecipeInformation);
-        System.out.println("******************");
-        System.out.println("******************");
-        System.out.println("******************");
-        System.out.println("******************");
-        System.out.println("SPOONACULAR CONTROLLER.getUserRecipes(query, limit): " + res);
-        System.out.println("******************");
-        System.out.println("******************");
-        System.out.println("******************");
-        System.out.println("******************");
+        return res;
+    }
 
+
+
+    @GetMapping("/spoonacularRecipes/{recipeId}")
+    @ResponseBody
+    public RecipeDto getSpoonacularRecipeById(
+            @PathVariable int recipeId
+    ) {
+        Recipe recipe = recipeService.getRecipeBySpoonacularId(recipeId);
+        RecipeDto res = RecipeDto.fromDomain(recipe);
         return res;
 
-
     }
+
+
 }
