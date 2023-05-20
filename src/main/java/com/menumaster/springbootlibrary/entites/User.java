@@ -45,6 +45,7 @@ public class User {
     @Column(name = "individual_menu")
     private String individualMenu = "";
 
+
     @ManyToMany
     @JoinTable(
             name = "user_favorite_recipe",

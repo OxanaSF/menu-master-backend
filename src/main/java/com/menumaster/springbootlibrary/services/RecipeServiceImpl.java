@@ -13,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,10 +50,13 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository.save(recipe);
     }
 
+
     @Override
-    public void deleteRecipe(Long id) {
-        recipeRepository.deleteById(id);
+    public void deleteRecipe(Long userId, int spoonacularId) {
+        Optional<Recipe> recipe = recipeRepository.findBySpoonacularIdAndUserId(spoonacularId, userId);
+        recipe.ifPresent(recipeRepository::delete);
     }
+
 
     @Override
     public Recipe getRecipeFromSpoonacularApi(String recipeId) {
@@ -88,9 +91,21 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe getRecipeBySpoonacularId(int spoonacularId) {
-        return null;
+        Recipe recipe = recipeRepository.findBySpoonacularId(spoonacularId);
+        return recipe;
     }
 
+
+//    @Override
+//    @Transactional
+//    public ResponseEntity<String> createRecipe(RecipeDto recipe, long userId) {
+//        List<String> response = new ArrayList<>();
+//
+//        Recipe newRecipe = recipe.toDomain();
+//        newRecipe.setUserId(userId);
+//        recipeRepository.save(newRecipe);
+//        return ResponseEntity.ok("Recipe created successfully");
+//    }
 
     @Override
     @Transactional
@@ -99,17 +114,22 @@ public class RecipeServiceImpl implements RecipeService {
 
         Recipe newRecipe = new Recipe(recipe);
         newRecipe.setUserId(userId);
-
-        System.out.println("***************");
-        System.out.println("***************");
-        System.out.println("newRecipe.getServingSize() " + newRecipe.getServingSize());
-        System.out.println("***************");
-        System.out.println("***************");
         recipeRepository.save(newRecipe);
 
         return ResponseEntity.ok("Recipe created successfully");
     }
 
+
+
+
+    @Override
+    public boolean recipeExists(RecipeDto recipe, long userId) {
+        Optional<Recipe> existingRecipe = recipeRepository.findBySpoonacularIdAndUserId(recipe.getSpoonacularId(), userId);
+        if (existingRecipe != null) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public List<RecipeDto> getUserRecipes(String userId) {
@@ -120,8 +140,11 @@ public class RecipeServiceImpl implements RecipeService {
                 .collect(Collectors.toList());
 
         return recipeDtos;
+    }
 
-
+    @Override
+    public boolean recipeExistsByUserIdAndSpoonacularId(long userId, int spoonacularId) {
+        return recipeRepository.existsByUserIdAndSpoonacularId(userId, spoonacularId);
     }
 
 
