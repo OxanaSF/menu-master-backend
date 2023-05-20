@@ -34,8 +34,9 @@ public class SavedMealPlanController {
             savedMealPlan.setUserId(userId);
             savedMealPlan.setPlanId(planId);
             savedMealPlan.setMealPlanData(savedMealPlanDto.getMealPlanData());
-
+            savedMealPlan.setPlanName(savedMealPlanDto.getPlanName());
             SavedMealPlan savedPlan = savedMealPlanService.save(savedMealPlan);
+
             return ResponseEntity.ok("Meal plan saved successfully with ID: " + savedPlan.getId());
 
     }

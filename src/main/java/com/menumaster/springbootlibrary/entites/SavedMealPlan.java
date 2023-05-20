@@ -16,14 +16,18 @@ public class SavedMealPlan {
     @Column(name = "plan_id")
     private Long planId;
 
+    @Column(name = "plan_name", length = 150)
+    private String planName;
+
     @Column(name = "meal_plan_data", columnDefinition = "json", length = 20000)
     private String mealPlanData;
 
-    public SavedMealPlan(Long id, Long userId, Long planId, String mealPlanData) {
+    public SavedMealPlan(Long id, Long userId, Long planId, String mealPlanData, String planName) {
         this.id = id;
         this.userId = userId;
         this.planId = planId;
         this.mealPlanData = mealPlanData;
+        this.planName = planName;
     }
 
     public SavedMealPlan() {
@@ -45,6 +49,10 @@ public class SavedMealPlan {
         return mealPlanData;
     }
 
+    public String getPlanName() {
+        return planName;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,5 +67,9 @@ public class SavedMealPlan {
 
     public void setMealPlanData(String mealPlanData) {
         this.mealPlanData = mealPlanData;
+    }
+
+    public void setPlanName(String planName) {
+        this.planName = planName;
     }
 }
