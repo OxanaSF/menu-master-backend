@@ -82,12 +82,12 @@ public class RecipeServiceImpl implements RecipeService {
         return recipe;
     }
 
-    @Override
-    public List<Recipe> searchRecipes(String query) {
-        List<Recipe> matchingRecipes = recipeRepository.
-                findByNameContainingOrCuisineTypeContainingOrRecipeIngredients_IngredientContaining(query, query, query);
-        return matchingRecipes;
-    }
+//    @Override
+//    public List<Recipe> searchRecipes(String query) {
+//        List<Recipe> matchingRecipes = recipeRepository.
+//                findByNameContainingOrCuisineTypeContainingOrRecipeIngredients_IngredientContaining(query, query);
+//        return matchingRecipes;
+//    }
 
     @Override
     public Recipe getRecipeBySpoonacularId(int spoonacularId) {
@@ -95,17 +95,6 @@ public class RecipeServiceImpl implements RecipeService {
         return recipe;
     }
 
-
-//    @Override
-//    @Transactional
-//    public ResponseEntity<String> createRecipe(RecipeDto recipe, long userId) {
-//        List<String> response = new ArrayList<>();
-//
-//        Recipe newRecipe = recipe.toDomain();
-//        newRecipe.setUserId(userId);
-//        recipeRepository.save(newRecipe);
-//        return ResponseEntity.ok("Recipe created successfully");
-//    }
 
     @Override
     @Transactional

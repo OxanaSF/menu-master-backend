@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
-    List<Recipe> findByNameContainingOrCuisineTypeContainingOrRecipeIngredients_IngredientContaining(String name, String cuisineType, String ingredient);
+//    List<Recipe> findByNameContainingOrCuisineTypeContainingOrRecipeIngredients_IngredientContaining(String name, String cuisineType);
     List<Recipe> findRecipesByUserId(String userId);
     Recipe findBySpoonacularId(int spoonacularId);
     Optional<Recipe> findBySpoonacularIdAndUserId(int spoonacularId, long userId);

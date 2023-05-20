@@ -15,7 +15,7 @@ public interface RecipeService {
 
 
     Recipe getRecipeFromSpoonacularApi(String recipeId);
-    List<Recipe> searchRecipes(String query);
+//    List<Recipe> searchRecipes(String query);
     Recipe getRecipeBySpoonacularId(int spoonacularId);
     public ResponseEntity<String> createRecipe(RecipeDto recipeDto, long userId);
     List<RecipeDto> getUserRecipes(String userId);

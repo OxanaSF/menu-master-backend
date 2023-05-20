@@ -45,8 +45,8 @@ public class Recipe {
     @Column(name = "spoonacular_id")
     private int spoonacularId;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+//    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
     @ManyToMany(mappedBy = "favoriteRecipes")
     private List<User> users = new ArrayList<>();
